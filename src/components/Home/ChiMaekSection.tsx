@@ -1,21 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Beer, Plus } from 'lucide-react';
-
 const ChiMaekSection = () => {
-  return (
-    <section className="py-20 bg-gradient-to-r from-korean-red via-korean-red/90 to-korean-yellow/80">
+  return <section className="py-20 bg-gradient-to-r from-korean-red via-korean-red/90 to-korean-yellow/80">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="text-white space-y-6">
             <div className="flex items-center space-x-4 mb-6">
-              <span className="korean-title text-6xl md:text-7xl">치</span>
+              <span className="korean-title text-6xl md:text-7xl text-amber-500">치</span>
               <Plus className="h-12 w-12 animate-pulse" />
-              <span className="korean-title text-6xl md:text-7xl">맥</span>
+              <span className="korean-title text-6xl md:text-7xl text-amber-500">맥</span>
             </div>
             
-            <h2 className="korean-title text-4xl md:text-5xl">
+            <h2 className="korean-title text-4xl md:text-5xl text-amber-500">
               Chi + Maek = Chicken + Beer
             </h2>
             
@@ -89,12 +87,12 @@ const ChiMaekSection = () => {
             
             {/* Decorative Elements */}
             <div className="absolute -top-4 -right-4 w-24 h-24 bg-korean-yellow/20 rounded-full animate-float"></div>
-            <div className="absolute bottom-4 -left-4 w-16 h-16 bg-white/20 rounded-full animate-float" style={{animationDelay: '1s'}}></div>
+            <div className="absolute bottom-4 -left-4 w-16 h-16 bg-white/20 rounded-full animate-float" style={{
+            animationDelay: '1s'
+          }}></div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ChiMaekSection;
