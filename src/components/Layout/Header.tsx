@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Facebook, Instagram, Phone } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
+import { Menu, X, Facebook, Instagram, Phone, User, LogOut, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import kTownLogo from '@/assets/ktown-logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isAdmin, signOut } = useAuth();
   const location = useLocation();
 
   const navigation = [
