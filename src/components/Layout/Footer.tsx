@@ -15,7 +15,8 @@ const Footer = () => {
                 <div>
                   <p className="font-medium">K-Town Newtown</p>
                   <p className="text-sm text-gray-300">
-                    123 King Street<br />
+                    Inside Newtown Hotel<br />
+                    174 King Street<br />
                     Newtown NSW 2042<br />
                     Australia
                   </p>
@@ -47,15 +48,15 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span>Mon–Thu</span>
-                <span>5pm–10pm</span>
+                <span>5:00pm–10:00pm</span>
               </div>
               <div className="flex justify-between">
                 <span>Fri–Sat</span>
-                <span>5pm–11pm</span>
+                <span>5:00pm–11:00pm</span>
               </div>
               <div className="flex justify-between">
                 <span>Sunday</span>
-                <span>5pm–10pm</span>
+                <span>5:00pm–10:00pm</span>
               </div>
             </div>
             
