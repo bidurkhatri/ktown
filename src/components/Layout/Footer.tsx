@@ -1,9 +1,7 @@
 import { MapPin, Clock, Phone, Mail, Facebook, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
 const Footer = () => {
-  return (
-    <footer className="bg-charcoal text-white">
+  return <footer className="bg-charcoal text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Contact Info */}
@@ -72,12 +70,10 @@ const Footer = () => {
           <div>
             <h3 className="korean-subtitle text-korean-yellow mb-4">Stay Connected</h3>
             <div className="flex space-x-4 mb-6">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
-                 className="bg-korean-red hover:bg-korean-red/80 p-3 rounded-full transition-colors">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-korean-red hover:bg-korean-red/80 p-3 rounded-full transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                 className="bg-korean-red hover:bg-korean-red/80 p-3 rounded-full transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-korean-red hover:bg-korean-red/80 p-3 rounded-full transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
             </div>
@@ -87,11 +83,7 @@ const Footer = () => {
                 Get updates on K-pop nights, beer specials, and new menu items!
               </p>
               <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-korean-red"
-                />
+                <input type="email" placeholder="Your email" className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-korean-red" />
                 <Button className="btn-korean rounded-l-none">
                   Subscribe
                 </Button>
@@ -105,13 +97,9 @@ const Footer = () => {
           <p className="text-sm text-gray-400">
             © 2024 K-Town Newtown. All rights reserved.
           </p>
-          <p className="text-sm text-gray-400">
-            Designed with ❤️ in Newtown
-          </p>
+          <p className="text-gray-400 text-lg"> 🫰🏻 in Newtown</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
