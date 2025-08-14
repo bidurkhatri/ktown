@@ -13,12 +13,10 @@ const BookTable = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
     date: '',
     time: '',
     guests: '',
-    specialRequests: '',
   });
 
   const timeSlots = [
@@ -30,7 +28,7 @@ const BookTable = () => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.time || !formData.guests) {
+    if (!formData.name || !formData.phone || !formData.date || !formData.time || !formData.guests) {
       toast({
         title: "Please fill in all required fields",
         variant: "destructive",
@@ -47,12 +45,10 @@ const BookTable = () => {
     // Reset form
     setFormData({
       name: '',
-      email: '',
       phone: '',
       date: '',
       time: '',
       guests: '',
-      specialRequests: '',
     });
   };
 
@@ -82,49 +78,33 @@ const BookTable = () => {
               {/* Form */}
               <Card className="shadow-lg">
                 <CardHeader>
-                  <CardTitle className="korean-subtitle text-2xl text-center">Reserve Your Table</CardTitle>
+                  <CardTitle className="korean-subtitle text-2xl text-center">Book Your Table</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Personal Info */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input
-                          id="name"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange('name', e.target.value)}
-                          placeholder="Your name"
-                          required
-                        />
-                      </div>
-                      
-                      <div>
-                        <Label htmlFor="phone">Phone Number *</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange('phone', e.target.value)}
-                          placeholder="0412 345 678"
-                          required
-                        />
-                      </div>
-                    </div>
-
+                  <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <Label htmlFor="email">Email Address *</Label>
+                      <Label htmlFor="name">Your Name *</Label>
                       <Input
-                        id="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
-                        placeholder="your@email.com"
+                        id="name"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
+                        placeholder="Your name"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="phone">Phone Number *</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        placeholder="0412 345 678"
                         required
                       />
                     </div>
 
-                    {/* Booking Details */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
                         <Label htmlFor="date">Date *</Label>
@@ -153,7 +133,7 @@ const BookTable = () => {
                       </div>
                       
                       <div>
-                        <Label htmlFor="guests">Guests *</Label>
+                        <Label htmlFor="guests">People *</Label>
                         <Select onValueChange={(value) => handleInputChange('guests', value)}>
                           <SelectTrigger>
                             <SelectValue placeholder="How many?" />
@@ -170,20 +150,9 @@ const BookTable = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <Label htmlFor="requests">Special Requests</Label>
-                      <Textarea
-                        id="requests"
-                        value={formData.specialRequests}
-                        onChange={(e) => handleInputChange('specialRequests', e.target.value)}
-                        placeholder="Dietary requirements, celebration details, etc."
-                        rows={3}
-                      />
-                    </div>
-
-                    <Button type="submit" className="w-full btn-korean text-lg py-4">
+                    <Button type="submit" className="w-full btn-korean text-lg py-3">
                       <Calendar className="mr-2 h-5 w-5" />
-                      Confirm Booking
+                      Book Table
                     </Button>
                   </form>
                 </CardContent>

@@ -17,10 +17,7 @@ const Header = () => {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Menu', href: '/menu' },
-    { name: 'Chi-Maek', href: '/chi-maek' },
-    { name: 'Vegan Seoul', href: '/vegan-seoul' },
-    { name: 'Book a Table', href: '/book' },
-    { name: 'Order Online', href: '/order' },
+    { name: 'Book Table', href: '/book' },
     { name: 'Location', href: '/location' },
   ];
 

@@ -2,9 +2,8 @@ import Layout from '@/components/Layout/Layout';
 import HeroSection from '@/components/Home/HeroSection';
 import AboutSection from '@/components/Home/AboutSection';
 import SignatureDishes from '@/components/Home/SignatureDishes';
-import ChiMaekSection from '@/components/Home/ChiMaekSection';
-import VeganSeoulSection from '@/components/Home/VeganSeoulSection';
 import CallToActionBar from '@/components/Home/CallToActionBar';
+import SimpleMobileNav from '@/components/SimpleMobileNav';
 
 const Index = () => {
   return (
@@ -12,9 +11,8 @@ const Index = () => {
       <HeroSection />
       <AboutSection />
       <SignatureDishes />
-      <ChiMaekSection />
-      <VeganSeoulSection />
       <CallToActionBar />
+      <SimpleMobileNav />
     </Layout>
   );
 };

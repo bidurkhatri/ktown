@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import Layout from '@/components/Layout/Layout';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Flame, Leaf, Plus } from 'lucide-react';
+import SimpleMenuItemCard from '@/components/SimpleMenuItemCard';
 import { toast } from 'sonner';
 
 interface MenuCategory {
@@ -75,12 +73,6 @@ const Menu = () => {
     }
   };
 
-  const formatPrice = (item: MenuItem) => {
-    const prices = [];
-    if (item.full_price) prices.push(`$${item.full_price}`);
-    if (item.half_price) prices.push(`$${item.half_price}`);
-    return prices.join(' / ') || 'Price on request';
-  };
 
   const filteredItems = activeFilter === 'all' 
     ? menuItems 
@@ -133,51 +125,9 @@ const Menu = () => {
                 </div>
 
                 {/* Menu Items Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredItems.map((item) => (
-                    <Card key={item.id} className="food-card overflow-hidden">
-                      <div className="h-48 bg-gradient-to-br from-korean-red/20 to-korean-yellow/20 flex items-center justify-center">
-                        <span className="text-6xl">{item.emoji || '🍽️'}</span>
-                      </div>
-                      
-                      <CardContent className="p-6">
-                        <div className="flex justify-between items-start mb-3">
-                          <h3 className="korean-subtitle text-xl">{item.name}</h3>
-                          <div className="text-right">
-                            <span className="text-korean-red font-bold text-lg">{formatPrice(item)}</span>
-                            {item.extra_price && (
-                              <div className="text-sm text-muted-foreground">Extra: +${item.extra_price}</div>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <p className="text-muted-foreground mb-4 leading-relaxed">
-                          {item.description}
-                        </p>
-                        
-                        <div className="flex items-center justify-between">
-                          <div className="flex space-x-2">
-                            {item.is_spicy && (
-                              <Badge variant="destructive" className="bg-korean-red">
-                                <Flame className="h-3 w-3 mr-1" />
-                                Spicy
-                              </Badge>
-                            )}
-                            {item.is_vegan && (
-                              <Badge variant="secondary" className="bg-green-500 text-white">
-                                <Leaf className="h-3 w-3 mr-1" />
-                                Vegan
-                              </Badge>
-                            )}
-                          </div>
-                          
-                          <Button size="sm" className="btn-korean">
-                            <Plus className="h-4 w-4 mr-1" />
-                            Add
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <SimpleMenuItemCard key={item.id} item={item} />
                   ))}
                 </div>
 

@@ -212,7 +212,6 @@ const Cart = () => {
                       <SelectContent>
                         <SelectItem value="pickup">Pickup</SelectItem>
                         <SelectItem value="delivery">Delivery</SelectItem>
-                        <SelectItem value="dine_in">Dine In</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
