@@ -24,8 +24,10 @@ const Cart = () => {
     customerName: '',
     customerPhone: '',
     customerAddress: '',
+    customerEmail: '',
     specialInstructions: '',
   });
+  const [formErrors, setFormErrors] = useState<{[key: string]: string}>({});
 
   const formatPrice = (price: number) => `$${price.toFixed(2)}`;
 
@@ -33,23 +35,57 @@ const Cart = () => {
     return item.menu_item[`${item.price_type}_price`] || 0;
   };
 
+  // Input validation
+  const validateForm = () => {
+    const errors: {[key: string]: string} = {};
+    
+    // Name validation
+    if (!orderForm.customerName.trim() || orderForm.customerName.trim().length < 2) {
+      errors.customerName = 'Name must be at least 2 characters';
+    }
+    
+    // Phone validation
+    const phoneRegex = /^[+]?[0-9\s\-\(\)]{10,}$/;
+    if (!phoneRegex.test(orderForm.customerPhone)) {
+      errors.customerPhone = 'Please enter a valid phone number';
+    }
+    
+    // Email validation for guest orders
+    if (!user) {
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      if (!orderForm.customerEmail.trim()) {
+        errors.customerEmail = 'Email is required for guest orders';
+      } else if (!emailRegex.test(orderForm.customerEmail)) {
+        errors.customerEmail = 'Please enter a valid email address';
+      }
+    }
+    
+    // Address validation for delivery
+    if (orderForm.orderType === 'delivery' && !orderForm.customerAddress.trim()) {
+      errors.customerAddress = 'Delivery address is required';
+    }
+    
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (items.length === 0) return;
+    if (items.length === 0 || !validateForm()) return;
 
     setIsProcessing(true);
     try {
       // Create order
       const orderData = {
         user_id: user?.id,
-        guest_email: !user ? 'guest@example.com' : undefined,
+        guest_email: !user ? orderForm.customerEmail : undefined,
         total_amount: getTotalPrice(),
         status: 'pending',
         order_type: orderForm.orderType,
-        customer_name: orderForm.customerName,
-        customer_phone: orderForm.customerPhone,
-        customer_address: orderForm.customerAddress,
-        special_instructions: orderForm.specialInstructions,
+        customer_name: orderForm.customerName.trim(),
+        customer_phone: orderForm.customerPhone.trim(),
+        customer_address: orderForm.customerAddress.trim() || null,
+        special_instructions: orderForm.specialInstructions.trim() || null,
       };
 
       const { data: order, error: orderError } = await supabase
@@ -228,8 +264,17 @@ const Cart = () => {
                       id="customerName"
                       required
                       value={orderForm.customerName}
-                      onChange={(e) => setOrderForm(prev => ({ ...prev, customerName: e.target.value }))}
+                      onChange={(e) => {
+                        setOrderForm(prev => ({ ...prev, customerName: e.target.value }));
+                        if (formErrors.customerName) {
+                          setFormErrors(prev => ({ ...prev, customerName: '' }));
+                        }
+                      }}
+                      className={formErrors.customerName ? 'border-destructive' : ''}
                     />
+                    {formErrors.customerName && (
+                      <p className="text-sm text-destructive mt-1">{formErrors.customerName}</p>
+                    )}
                   </div>
 
                   <div>
@@ -238,10 +283,43 @@ const Cart = () => {
                       id="customerPhone"
                       type="tel"
                       required
+                      placeholder="(555) 123-4567"
                       value={orderForm.customerPhone}
-                      onChange={(e) => setOrderForm(prev => ({ ...prev, customerPhone: e.target.value }))}
+                      onChange={(e) => {
+                        setOrderForm(prev => ({ ...prev, customerPhone: e.target.value }));
+                        if (formErrors.customerPhone) {
+                          setFormErrors(prev => ({ ...prev, customerPhone: '' }));
+                        }
+                      }}
+                      className={formErrors.customerPhone ? 'border-destructive' : ''}
                     />
+                    {formErrors.customerPhone && (
+                      <p className="text-sm text-destructive mt-1">{formErrors.customerPhone}</p>
+                    )}
                   </div>
+
+                  {!user && (
+                    <div>
+                      <Label htmlFor="customerEmail">Email *</Label>
+                      <Input
+                        id="customerEmail"
+                        type="email"
+                        required
+                        placeholder="your.email@example.com"
+                        value={orderForm.customerEmail}
+                        onChange={(e) => {
+                          setOrderForm(prev => ({ ...prev, customerEmail: e.target.value }));
+                          if (formErrors.customerEmail) {
+                            setFormErrors(prev => ({ ...prev, customerEmail: '' }));
+                          }
+                        }}
+                        className={formErrors.customerEmail ? 'border-destructive' : ''}
+                      />
+                      {formErrors.customerEmail && (
+                        <p className="text-sm text-destructive mt-1">{formErrors.customerEmail}</p>
+                      )}
+                    </div>
+                  )}
 
                   {orderForm.orderType === 'delivery' && (
                     <div>
@@ -249,9 +327,19 @@ const Cart = () => {
                       <Textarea
                         id="customerAddress"
                         required
+                        placeholder="123 Main St, City, State 12345"
                         value={orderForm.customerAddress}
-                        onChange={(e) => setOrderForm(prev => ({ ...prev, customerAddress: e.target.value }))}
+                        onChange={(e) => {
+                          setOrderForm(prev => ({ ...prev, customerAddress: e.target.value }));
+                          if (formErrors.customerAddress) {
+                            setFormErrors(prev => ({ ...prev, customerAddress: '' }));
+                          }
+                        }}
+                        className={formErrors.customerAddress ? 'border-destructive' : ''}
                       />
+                      {formErrors.customerAddress && (
+                        <p className="text-sm text-destructive mt-1">{formErrors.customerAddress}</p>
+                      )}
                     </div>
                   )}
 
