@@ -2,39 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* K-Town Newtown Design System - Korean Street Food Aesthetics */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
+    /* Core Brand Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 0 0% 13%;
+    
+    /* K-Town Brand Colors */
+    --korean-red: 348 87% 55%;
+    --korean-yellow: 51 100% 50%;
+    --charcoal: 0 0% 13%;
+    --neon-glow: 348 87% 70%;
+    
+    /* Semantic Tokens */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 13%;
+    
+    --primary: 348 87% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 348 87% 70%;
+    
+    --secondary: 51 100% 50%;
+    --secondary-foreground: 0 0% 13%;
+    --secondary-glow: 51 100% 70%;
+    
+    --accent: 0 0% 13%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 91%;
+    --input: 0 0% 91%;
+    --ring: 348 87% 55%;
+    
+    /* Design System Gradients */
+    --gradient-korean: linear-gradient(135deg, hsl(var(--korean-red)), hsl(var(--korean-yellow)));
+    --gradient-neon: linear-gradient(135deg, hsl(var(--korean-red)), hsl(var(--neon-glow)));
+    --gradient-charcoal: linear-gradient(135deg, hsl(var(--charcoal)), hsl(0 0% 20%));
+    
+    /* Shadows & Effects */
+    --shadow-neon: 0 0 20px hsl(var(--korean-red) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--korean-yellow) / 0.2);
+    --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.1);
+    
+    /* Typography Scale */
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
 
     --radius: 0.5rem;
 
@@ -56,41 +77,29 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 0 0% 13%;
+    --foreground: 0 0% 100%;
+    
+    --card: 0 0% 16%;
+    --card-foreground: 0 0% 100%;
+    
+    --primary: 348 87% 55%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 51 100% 50%;
+    --secondary-foreground: 0 0% 13%;
+    
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 65%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    
+    --shadow-neon: 0 0 30px hsl(var(--korean-red) / 0.5);
+    --shadow-glow: 0 0 50px hsl(var(--korean-yellow) / 0.3);
   }
 }
 
@@ -100,6 +109,56 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Korean Neon Button Styles */
+  .btn-korean {
+    @apply relative px-6 py-3 bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-display font-bold tracking-wider uppercase;
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--korean-red)/0.5)];
+    @apply border-2 border-transparent hover:border-primary-glow;
+  }
+  
+  .btn-korean-secondary {
+    @apply relative px-6 py-3 bg-gradient-to-r from-secondary to-secondary-glow text-secondary-foreground font-display font-bold tracking-wider uppercase;
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--korean-yellow)/0.5)];
+    @apply border-2 border-transparent hover:border-secondary-glow;
+  }
+  
+  .btn-outline-korean {
+    @apply px-6 py-3 border-2 border-primary text-primary font-display font-bold tracking-wider uppercase;
+    @apply transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:scale-105;
+    @apply hover:shadow-[0_0_20px_hsl(var(--korean-red)/0.3)];
+  }
+  
+  /* Neon Glow Effects */
+  .neon-glow {
+    @apply drop-shadow-[0_0_10px_hsl(var(--korean-red)/0.7)];
+  }
+  
+  .yellow-glow {
+    @apply drop-shadow-[0_0_10px_hsl(var(--korean-yellow)/0.7)];
+  }
+  
+  /* Food Card Styles */
+  .food-card {
+    @apply bg-card rounded-lg overflow-hidden shadow-[0_4px_24px_hsl(0_0%_0%/0.1)];
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_32px_hsl(0_0%_0%/0.15)];
+  }
+  
+  /* Korean Typography */
+  .korean-title {
+    @apply font-display text-4xl md:text-6xl font-bold tracking-wider uppercase;
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  
+  .korean-subtitle {
+    @apply font-display text-xl md:text-2xl font-bold tracking-wide uppercase text-accent;
   }
 }
