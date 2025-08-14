@@ -46,6 +46,38 @@ const Header = () => {
             ))}
           </nav>
 
+          {/* Auth Section - Desktop */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {user ? (
+              <div className="flex items-center space-x-2">
+                {isAdmin && (
+                  <Link to="/admin">
+                    <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
+                      <Shield className="h-4 w-4 mr-1" />
+                      Admin
+                    </Button>
+                  </Link>
+                )}
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={signOut}
+                  className="text-foreground hover:text-primary"
+                >
+                  <LogOut className="h-4 w-4 mr-1" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <Link to="/auth">
+                <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
+                  <User className="h-4 w-4 mr-1" />
+                  Sign In
+                </Button>
+              </Link>
+            )}
+          </div>
+
           {/* Social Icons & Call Button - Desktop */}
           <div className="hidden lg:flex items-center space-x-4">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
@@ -89,8 +121,46 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-                </Link>
+              </Link>
               ))}
+              
+              {/* Mobile Auth Section */}
+              <div className="pt-4 border-t border-border">
+                {user ? (
+                  <div className="space-y-2">
+                    {isAdmin && (
+                      <Link 
+                        to="/admin" 
+                        className="flex items-center text-sm font-medium transition-colors hover:text-primary text-foreground"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Shield className="h-4 w-4 mr-2" />
+                        Admin Dashboard
+                      </Link>
+                    )}
+                    <button 
+                      onClick={() => {
+                        signOut();
+                        setIsMenuOpen(false);
+                      }}
+                      className="flex items-center text-sm font-medium transition-colors hover:text-primary text-foreground w-full text-left"
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <Link 
+                    to="/auth" 
+                    className="flex items-center text-sm font-medium transition-colors hover:text-primary text-foreground"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    Sign In
+                  </Link>
+                )}
+              </div>
+              
               <div className="flex items-center space-x-4 pt-4 border-t border-border">
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
                    className="text-muted-foreground hover:text-primary transition-colors">
