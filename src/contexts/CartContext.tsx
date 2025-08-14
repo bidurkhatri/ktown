@@ -41,11 +41,12 @@ export const useCart = () => {
   return context;
 };
 
-// Generate a session ID for guest users
+// Generate a secure session ID for guest users (32+ characters for security)
 const getSessionId = () => {
   let sessionId = localStorage.getItem('cart_session_id');
-  if (!sessionId) {
-    sessionId = 'guest_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+  if (!sessionId || sessionId.length < 32) {
+    // Generate a cryptographically secure 64-character session ID
+    sessionId = crypto.randomUUID() + crypto.randomUUID().replace(/-/g, '');
     localStorage.setItem('cart_session_id', sessionId);
   }
   return sessionId;
