@@ -14,6 +14,107 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          booking_date: string
+          booking_time: string
+          created_at: string
+          guest_email: string
+          guest_name: string
+          guest_phone: string
+          id: string
+          party_size: number
+          special_requests: string | null
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          booking_date: string
+          booking_time: string
+          created_at?: string
+          guest_email: string
+          guest_name: string
+          guest_phone: string
+          id?: string
+          party_size: number
+          special_requests?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          booking_date?: string
+          booking_time?: string
+          created_at?: string
+          guest_email?: string
+          guest_name?: string
+          guest_phone?: string
+          id?: string
+          party_size?: number
+          special_requests?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      cart_items: {
+        Row: {
+          created_at: string
+          id: string
+          menu_item_id: string
+          price_type: string
+          quantity: number
+          session_id: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          menu_item_id: string
+          price_type: string
+          quantity: number
+          session_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          menu_item_id?: string
+          price_type?: string
+          quantity?: number
+          session_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cart_items_menu_item_id_fkey"
+            columns: ["menu_item_id"]
+            isOneToOne: false
+            referencedRelation: "menu_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cart_items_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       menu_categories: {
         Row: {
           created_at: string
@@ -106,6 +207,107 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "menu_categories"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          id: string
+          menu_item_id: string
+          order_id: string
+          price_per_item: number
+          price_type: string
+          quantity: number
+          total_price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          menu_item_id: string
+          order_id: string
+          price_per_item: number
+          price_type: string
+          quantity: number
+          total_price: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          menu_item_id?: string
+          order_id?: string
+          price_per_item?: number
+          price_type?: string
+          quantity?: number
+          total_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_menu_item_id_fkey"
+            columns: ["menu_item_id"]
+            isOneToOne: false
+            referencedRelation: "menu_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          customer_address: string | null
+          customer_name: string
+          customer_phone: string
+          guest_email: string | null
+          id: string
+          order_type: string
+          special_instructions: string | null
+          status: string
+          total_amount: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_address?: string | null
+          customer_name: string
+          customer_phone: string
+          guest_email?: string | null
+          id?: string
+          order_type: string
+          special_instructions?: string | null
+          status?: string
+          total_amount: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_address?: string | null
+          customer_name?: string
+          customer_phone?: string
+          guest_email?: string | null
+          id?: string
+          order_type?: string
+          special_instructions?: string | null
+          status?: string
+          total_amount?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
           },
         ]
       }

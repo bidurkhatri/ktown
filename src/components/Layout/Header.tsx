@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import { Menu, X, Facebook, Instagram, Phone, User, LogOut, Shield } from 'lucide-react';
+import { useCart } from '@/contexts/CartContext';
+import { Menu, X, Facebook, Instagram, Phone, User, LogOut, Shield, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import kTownLogo from '@/assets/ktown-logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, isAdmin, signOut } = useAuth();
+  const { getTotalItems } = useCart();
   const location = useLocation();
+  const totalItems = getTotalItems();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -46,10 +50,29 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Auth Section - Desktop */}
+          {/* Cart & Auth Section - Desktop */}
           <div className="hidden lg:flex items-center space-x-4">
+            {/* Cart */}
+            <Link to="/cart">
+              <Button variant="ghost" size="sm" className="text-foreground hover:text-primary relative">
+                <ShoppingCart className="h-4 w-4 mr-1" />
+                Cart
+                {totalItems > 0 && (
+                  <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
+                    {totalItems}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+
             {user ? (
               <div className="flex items-center space-x-2">
+                <Link to="/profile">
+                  <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
+                    <User className="h-4 w-4 mr-1" />
+                    Profile
+                  </Button>
+                </Link>
                 {isAdmin && (
                   <Link to="/admin">
                     <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
@@ -124,10 +147,32 @@ const Header = () => {
               </Link>
               ))}
               
-              {/* Mobile Auth Section */}
-              <div className="pt-4 border-t border-border">
+              {/* Mobile Cart & Auth Section */}
+              <div className="pt-4 border-t border-border space-y-2">
+                <Link 
+                  to="/cart" 
+                  className="flex items-center text-sm font-medium transition-colors hover:text-primary text-foreground"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <ShoppingCart className="h-4 w-4 mr-2" />
+                  Cart
+                  {totalItems > 0 && (
+                    <Badge variant="destructive" className="ml-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
+                      {totalItems}
+                    </Badge>
+                  )}
+                </Link>
+
                 {user ? (
                   <div className="space-y-2">
+                    <Link 
+                      to="/profile" 
+                      className="flex items-center text-sm font-medium transition-colors hover:text-primary text-foreground"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <User className="h-4 w-4 mr-2" />
+                      Profile
+                    </Link>
                     {isAdmin && (
                       <Link 
                         to="/admin" 
