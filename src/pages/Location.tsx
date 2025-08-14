@@ -1,7 +1,8 @@
+
 import Layout from '@/components/Layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Clock, Phone, Mail, Train, Car, Navigation } from 'lucide-react';
+import { MapPin, Clock, Phone, Mail, Train, Car, Navigation, ExternalLink, Calendar } from 'lucide-react';
 
 const Location = () => {
   return (
@@ -13,8 +14,8 @@ const Location = () => {
             <h1 className="korean-title text-5xl md:text-7xl mb-4">
               Find Us
             </h1>
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto">
-              Right in the heart of Newtown's vibrant food scene
+            <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
+              Find us upstairs inside the iconic Newtown Hotel — right in the heart of King Street's vibrant dining scene.
             </p>
           </div>
         </section>
@@ -23,7 +24,7 @@ const Location = () => {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Map */}
+              {/* Interactive Map */}
               <div className="space-y-6">
                 <Card>
                   <CardHeader>
@@ -33,32 +34,52 @@ const Location = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    {/* Placeholder for Google Maps */}
-                    <div className="bg-gray-200 rounded-lg h-80 flex items-center justify-center mb-4">
-                      <div className="text-center">
-                        <MapPin className="h-16 w-16 text-korean-red mx-auto mb-4" />
-                        <p className="text-lg font-semibold">Interactive Map</p>
-                        <p className="text-muted-foreground">Google Maps integration would go here</p>
-                      </div>
+                    {/* Google Maps Embed */}
+                    <div className="relative overflow-hidden rounded-lg mb-4">
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.455678!2d151.174456!3d-33.897112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b0221ad33bb7%3A0x59dfbc5acb6cd2c4!2sNewtown%20Hotel!5e0!3m2!1sen!2sau!4v1691548000000!5m2!1sen!2sau"
+                        width="100%"
+                        height="350"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="w-full h-80 rounded-lg"
+                        title="K-Town Newtown @ Newtown Hotel"
+                      />
                     </div>
                     
-                    <div className="space-y-2">
+                    <div className="space-y-2 mb-4">
                       <p className="font-semibold text-lg">K-Town Newtown</p>
-                      <p>123 King Street</p>
+                      <p className="text-muted-foreground">Inside Newtown Hotel</p>
+                      <p>174 King Street</p>
                       <p>Newtown NSW 2042</p>
                       <p>Australia</p>
                     </div>
                     
-                    <Button className="w-full mt-4 btn-korean" asChild>
-                      <a 
-                        href="https://maps.google.com/maps?q=123+King+Street,+Newtown+NSW+2042" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                      >
-                        <Navigation className="mr-2 h-4 w-4" />
-                        Get Directions
-                      </a>
-                    </Button>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button className="flex-1 btn-korean" asChild>
+                        <a 
+                          href="https://maps.google.com/maps?q=174+King+Street,+Newtown+NSW+2042" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          <Navigation className="mr-2 h-4 w-4" />
+                          Get Directions
+                        </a>
+                      </Button>
+                      
+                      <Button variant="outline" className="flex-1" asChild>
+                        <a 
+                          href="https://www.google.com/maps/@-33.897112,151.174456,3a,75y,90t/data=!3m6!1e1" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          Street View
+                        </a>
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -67,11 +88,17 @@ const Location = () => {
               <div className="space-y-8">
                 {/* Contact Details */}
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="korean-subtitle text-2xl flex items-center">
                       <Phone className="mr-2 h-6 w-6 text-korean-red" />
                       Contact Details
                     </CardTitle>
+                    <Button className="btn-korean-secondary" asChild>
+                      <a href="/book">
+                        <Calendar className="mr-2 h-4 w-4" />
+                        Book Table
+                      </a>
+                    </Button>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center space-x-3">
@@ -121,7 +148,7 @@ const Location = () => {
                     </div>
                     
                     <div className="mt-4 p-4 bg-korean-yellow/10 rounded-lg">
-                      <p className="text-sm text-center">
+                      <p className="text-sm text-center text-muted-foreground">
                         <strong>Last orders:</strong> 30 minutes before closing
                       </p>
                     </div>
@@ -138,7 +165,7 @@ const Location = () => {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-start space-x-3">
-                      <Train className="h-5 w-5 text-korean-red mt-0.5" />
+                      <Train className="h-5 w-5 text-korean-red mt-0.5 flex-shrink-0" />
                       <div>
                         <p className="font-semibold">By Train</p>
                         <p className="text-sm text-muted-foreground">
@@ -149,23 +176,23 @@ const Location = () => {
                     </div>
                     
                     <div className="flex items-start space-x-3">
-                      <Car className="h-5 w-5 text-korean-red mt-0.5" />
+                      <Car className="h-5 w-5 text-korean-red mt-0.5 flex-shrink-0" />
                       <div>
                         <p className="font-semibold">By Car</p>
                         <p className="text-sm text-muted-foreground">
-                          Street parking available on King Street<br />
-                          Paid parking after 6pm weekdays
+                          Limited street parking on King Street<br />
+                          Free after 6pm weekdays
                         </p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
-                      <span className="h-5 w-5 text-korean-red mt-0.5 text-center font-bold">🚌</span>
+                      <span className="h-5 w-5 text-korean-red mt-0.5 text-center font-bold text-lg flex-shrink-0">🚌</span>
                       <div>
                         <p className="font-semibold">By Bus</p>
                         <p className="text-sm text-muted-foreground">
-                          Multiple bus routes stop on King Street<br />
-                          Routes 422, 423, 426, 428
+                          Routes 422, 423, 426, 428, 430, 370 stop nearby<br />
+                          Multiple stops along King Street
                         </p>
                       </div>
                     </div>
