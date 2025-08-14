@@ -82,12 +82,12 @@ const Menu = () => {
     <Layout>
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <section className="py-16 bg-gradient-to-r from-korean-red to-korean-yellow text-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-korean-red to-korean-yellow text-white">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="korean-title text-5xl md:text-7xl mb-4">
+            <h1 className="korean-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl mb-4 sm:mb-6">
               Our Menu
             </h1>
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl max-w-xl md:max-w-2xl mx-auto px-4">
               Authentic Korean flavours meet Newtown vibes
             </p>
           </div>
@@ -104,11 +104,11 @@ const Menu = () => {
             ) : (
               <>
                 {/* Category Filters */}
-                <div className="flex flex-wrap justify-center gap-4 mb-12">
+                <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 px-4">
                   <Button
                     onClick={() => setActiveFilter('all')}
                     variant={activeFilter === 'all' ? 'default' : 'outline'}
-                    className={activeFilter === 'all' ? 'btn-korean' : 'btn-outline-korean'}
+                    className={`${activeFilter === 'all' ? 'btn-korean' : 'btn-outline-korean'} text-sm sm:text-base px-3 sm:px-4 py-2`}
                   >
                     All Items
                   </Button>
@@ -117,7 +117,7 @@ const Menu = () => {
                       key={category.id}
                       onClick={() => setActiveFilter(category.id)}
                       variant={activeFilter === category.id ? 'default' : 'outline'}
-                      className={activeFilter === category.id ? 'btn-korean' : 'btn-outline-korean'}
+                      className={`${activeFilter === category.id ? 'btn-korean' : 'btn-outline-korean'} text-sm sm:text-base px-3 sm:px-4 py-2`}
                     >
                       {category.name}
                     </Button>
@@ -125,7 +125,7 @@ const Menu = () => {
                 </div>
 
                 {/* Menu Items Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 px-4">
                   {filteredItems.map((item) => (
                     <SimpleMenuItemCard key={item.id} item={item} />
                   ))}

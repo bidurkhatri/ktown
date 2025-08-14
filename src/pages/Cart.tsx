@@ -127,56 +127,62 @@ const Cart = () => {
           <span className="text-muted-foreground">({getTotalItems()} items)</span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-3 sm:space-y-4">
             {items.map((item) => (
               <Card key={item.id}>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-1">
-                      <h3 className="font-semibold flex items-center gap-2">
-                        {item.menu_item.emoji} {item.menu_item.name}
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                        <span className="flex items-center gap-2">
+                          {item.menu_item.emoji} {item.menu_item.name}
+                        </span>
                         <span className="text-sm text-muted-foreground capitalize">
                           ({item.price_type})
                         </span>
                       </h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-muted-foreground line-clamp-2 sm:line-clamp-1">
                         {item.menu_item.description}
                       </p>
-                      <p className="font-medium text-primary">
+                      <p className="font-medium text-primary text-sm sm:text-base">
                         {formatPrice(getItemPrice(item))} each
                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <span className="w-12 text-center font-medium">{item.quantity}</span>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold">
-                        {formatPrice(getItemPrice(item) * item.quantity)}
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeFromCart(item.id)}
-                        className="text-destructive hover:text-destructive"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                    <div className="flex items-center justify-between sm:justify-end gap-4">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="h-8 w-8 sm:h-9 sm:w-9"
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        >
+                          <Minus className="h-3 w-3 sm:h-4 sm:w-4" />
+                        </Button>
+                        <span className="w-8 sm:w-12 text-center font-medium">{item.quantity}</span>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="h-8 w-8 sm:h-9 sm:w-9"
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        >
+                          <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
+                        </Button>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-semibold text-sm sm:text-base">
+                          {formatPrice(getItemPrice(item) * item.quantity)}
+                        </p>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-destructive hover:text-destructive h-8 px-2"
+                        >
+                          <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
