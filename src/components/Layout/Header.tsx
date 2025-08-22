@@ -75,8 +75,8 @@ const Header = () => {
             ) : (
               <Link to="/auth">
                 <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
-                  <User className="h-4 w-4 mr-1" />
-                  Sign In
+                  <Shield className="h-4 w-4 mr-1" />
+                  Admin Login
                 </Button>
               </Link>
             )}
@@ -167,8 +167,8 @@ const Header = () => {
                     className="flex items-center text-sm font-medium transition-colors hover:text-primary text-foreground"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <User className="h-4 w-4 mr-2" />
-                    Sign In
+                    <Shield className="h-4 w-4 mr-2" />
+                    Admin Login
                   </Link>
                 )}
               </div>
