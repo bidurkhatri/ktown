@@ -133,6 +133,36 @@ export type Database = {
         }
         Relationships: []
       }
+      menu_images: {
+        Row: {
+          created_at: string
+          file_path: string
+          id: string
+          is_active: boolean | null
+          name: string
+          updated_at: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          file_path: string
+          id?: string
+          is_active?: boolean | null
+          name: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          file_path?: string
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
       menu_items: {
         Row: {
           category_id: string

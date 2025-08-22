@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import Layout from '@/components/Layout/Layout';
 import { Button } from '@/components/ui/button';
 import SimpleMenuItemCard from '@/components/SimpleMenuItemCard';
+import MenuImageDisplay from '@/components/MenuImageDisplay';
 import { toast } from 'sonner';
 
 interface MenuCategory {
@@ -90,6 +91,19 @@ const Menu = () => {
             <p className="text-lg sm:text-xl md:text-2xl max-w-xl md:max-w-2xl mx-auto px-4">
               Authentic Korean flavours meet Newtown vibes
             </p>
+          </div>
+        </section>
+
+        {/* Menu Image Display */}
+        <section className="py-8 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold mb-2">Our Full Menu</h2>
+              <p className="text-muted-foreground">Take a look at our complete menu</p>
+            </div>
+            <div className="max-w-4xl mx-auto">
+              <MenuImageDisplay />
+            </div>
           </div>
         </section>
 

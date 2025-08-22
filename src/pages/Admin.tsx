@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import MenuManager from '@/components/Admin/MenuManager';
 import CategoryManager from '@/components/Admin/CategoryManager';
 import UserManager from '@/components/Admin/UserManager';
+import MenuImageManager from '@/components/Admin/MenuImageManager';
 
 const Admin = () => {
   const { user, isAdmin, loading } = useAuth();
@@ -53,9 +54,10 @@ const Admin = () => {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <Tabs defaultValue="menu" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsList className="grid w-full grid-cols-4 mb-8">
                 <TabsTrigger value="menu">Menu Items</TabsTrigger>
                 <TabsTrigger value="categories">Categories</TabsTrigger>
+                <TabsTrigger value="menu-image">Menu Image</TabsTrigger>
                 <TabsTrigger value="users">Users</TabsTrigger>
               </TabsList>
               
@@ -65,6 +67,10 @@ const Admin = () => {
               
               <TabsContent value="categories">
                 <CategoryManager />
+              </TabsContent>
+              
+              <TabsContent value="menu-image">
+                <MenuImageManager />
               </TabsContent>
               
               <TabsContent value="users">
