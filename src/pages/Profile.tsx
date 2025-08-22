@@ -8,32 +8,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { User, ShoppingBag, Calendar, Edit, Save, X } from 'lucide-react';
+import { User, Calendar, Edit, Save, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-interface Order {
-  id: string;
-  total_amount: number;
-  status: string;
-  order_type: string;
-  customer_name: string;
-  created_at: string;
-  order_items: {
-    id: string;
-    quantity: number;
-    price_type: string;
-    total_price: number;
-    menu_item: {
-      name: string;
-      emoji?: string;
-    };
-  }[];
-}
 
 interface Booking {
   id: string;
-  guest_name: string;
+  customer_name: string;
+  customer_email: string;
+  customer_phone?: string;
   booking_date: string;
   booking_time: string;
   party_size: number;
@@ -46,7 +30,6 @@ const Profile = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [orders, setOrders] = useState<Order[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingProfile, setEditingProfile] = useState(false);
@@ -78,34 +61,6 @@ const Profile = () => {
         setProfileData({
           display_name: profile.display_name || '',
         });
-      }
-
-      // Fetch orders
-      const { data: ordersData, error: ordersError } = await supabase
-        .from('orders')
-        .select(`
-          id,
-          total_amount,
-          status,
-          order_type,
-          customer_name,
-          created_at,
-          order_items(
-            id,
-            quantity,
-            price_type,
-            total_price,
-            menu_item:menu_items(
-              name,
-              emoji
-            )
-          )
-        `)
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
-
-      if (!ordersError) {
-        setOrders(ordersData || []);
       }
 
       // Fetch bookings
@@ -199,14 +154,10 @@ const Profile = () => {
           </div>
 
           <Tabs defaultValue="profile" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="profile" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
                 Profile
-              </TabsTrigger>
-              <TabsTrigger value="orders" className="flex items-center gap-2">
-                <ShoppingBag className="h-4 w-4" />
-                Orders
               </TabsTrigger>
               <TabsTrigger value="bookings" className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
@@ -253,69 +204,6 @@ const Profile = () => {
                   </div>
                 </CardContent>
               </Card>
-            </TabsContent>
-
-            {/* Orders Tab */}
-            <TabsContent value="orders">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold">Order History</h2>
-                  <Link to="/menu">
-                    <Button>Order Again</Button>
-                  </Link>
-                </div>
-                {loading ? (
-                  <Card>
-                    <CardContent className="p-6">
-                      <p>Loading orders...</p>
-                    </CardContent>
-                  </Card>
-                ) : orders.length === 0 ? (
-                  <Card>
-                    <CardContent className="p-6 text-center">
-                      <ShoppingBag className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground">No orders found</p>
-                      <Link to="/menu">
-                        <Button className="mt-4">Browse Menu</Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ) : (
-                  orders.map((order) => (
-                    <Card key={order.id}>
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div>
-                            <h3 className="font-semibold">Order #{order.id.slice(-8)}</h3>
-                            <p className="text-sm text-muted-foreground">
-                              {formatDate(order.created_at)} • {order.order_type}
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <Badge className={getStatusColor(order.status)}>
-                              {order.status}
-                            </Badge>
-                            <p className="font-semibold mt-1">
-                              {formatPrice(order.total_amount)}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="space-y-2">
-                          {order.order_items.map((item) => (
-                            <div key={item.id} className="flex justify-between text-sm">
-                              <span>
-                                {item.menu_item.emoji} {item.menu_item.name} x{item.quantity}
-                                <span className="text-muted-foreground ml-1">({item.price_type})</span>
-                              </span>
-                              <span>{formatPrice(item.total_price)}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))
-                )}
-              </div>
             </TabsContent>
 
             {/* Bookings Tab */}

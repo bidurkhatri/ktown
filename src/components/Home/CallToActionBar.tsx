@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { MapPin, Calendar, Phone, ShoppingBag } from 'lucide-react';
+import { MapPin, Calendar, Phone } from 'lucide-react';
 
 const CallToActionBar = () => {
   return (
@@ -13,7 +13,7 @@ const CallToActionBar = () => {
               Ready for K-Town?
             </h2>
             <p className="text-xl text-gray-300">
-              Visit us in Newtown or order for delivery
+              Visit us in Newtown for authentic Korean dining
             </p>
           </div>
           
@@ -29,13 +29,6 @@ const CallToActionBar = () => {
               <Link to="/book">
                 <Calendar className="mr-2 h-5 w-5" />
                 Book a Table
-              </Link>
-            </Button>
-            
-            <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-charcoal text-lg px-8 py-4">
-              <Link to="/order">
-                <ShoppingBag className="mr-2 h-5 w-5" />
-                Order Online
               </Link>
             </Button>
           </div>
@@ -59,17 +52,10 @@ const CallToActionBar = () => {
             </a>
           </Button>
         </div>
-        
-        <Button asChild className="w-full mt-3 btn-outline-korean">
-          <Link to="/order">
-            <ShoppingBag className="mr-2 h-4 w-4" />
-            Order Online
-          </Link>
-        </Button>
       </div>
 
       {/* Add bottom padding to main content on mobile to account for sticky bar */}
-      <div className="md:hidden h-32"></div>
+      <div className="md:hidden h-20"></div>
     </>
   );
 };
